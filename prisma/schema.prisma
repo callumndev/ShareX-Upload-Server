@@ -35,11 +35,13 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+    id         String  @id @default(cuid())
+    name       String?
+    image      String?
+    registered Boolean @default(false)
+
+    accounts Account[]
+    sessions Session[]
 }
 
 model VerificationToken {
@@ -48,4 +50,11 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model SiteSettings {
+    site  String  @id
+    setup Boolean @default(false)
+    superadmin String
+    allowRegistration Boolean @default(false)
 }
