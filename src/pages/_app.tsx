@@ -13,34 +13,34 @@ import { api } from "@/utils/api";
 import "@/styles/globals.css";
 
 const MyApp: AppType<{ session: Session | null }> = ({
-  Component,
-  pageProps: { session, ...pageProps },
+    Component,
+    pageProps: { session, ...pageProps },
 }) => {
-  const settings = api.site.getSettings.useQuery();
-  const [showSetup, setShowSetup] = useState(false);
+    const settings = api.site.getSettings.useQuery();
+    const [showSetup, setShowSetup] = useState(false);
 
-  useEffect(() => {
-    // Wait until status has finished loading
-    if (settings.status != 'loading') {
-      // Check success status
-      if (settings.status == 'success' && !showSetup) {
-        // Check if site has not been setup before
-        if (!settings.data || !settings.data.setup)
-          setShowSetup(true);
-      }
-    }
-  }, [showSetup, settings.data, settings.status]);
+    useEffect(() => {
+        // Wait until status has finished loading
+        if (settings.status != 'loading') {
+            // Check success status
+            if (settings.status == 'success' && !showSetup) {
+                // Check if site has not been setup before
+                if (!settings.data || !settings.data.setup)
+                    setShowSetup(true);
+            }
+        }
+    }, [showSetup, settings.data, settings.status]);
 
-  return (
-    <SessionProvider session={session}>
-      <Toaster />
-      {
-        (showSetup) ?
-          <SiteSetup /> :
-          <Component {...pageProps} />
-      }
-    </SessionProvider>
-  );
+    return (
+        <SessionProvider session={session}>
+            <Toaster />
+            {
+                (showSetup) ?
+                    <SiteSetup /> :
+                    <Component {...pageProps} />
+            }
+        </SessionProvider>
+    );
 };
 
 export default api.withTRPC(MyApp);

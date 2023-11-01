@@ -53,8 +53,8 @@ model VerificationToken {
 }
 
 model SiteSettings {
-    site  String  @id
-    setup Boolean @default(false)
-    superadmin String
+    site              String  @id
+    setup             Boolean @default(false)
+    superadmin        String
     allowRegistration Boolean @default(false)
 }
