@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 
 import SiteSetup from "@/components/SiteSetup";
+import Loading from "@/components/Loading";
 
 import { api } from "@/utils/api";
 
@@ -30,6 +31,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
             }
         }
     }, [showSetup, settings.data, settings.status]);
+
+    // Show loading
+    if (settings.isLoading) {
+        return <Loading message="Checking site setup..." />;
+    }
 
     return (
         <SessionProvider session={session}>
