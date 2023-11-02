@@ -18,14 +18,14 @@ export const siteRouter = createTRPCRouter({
         .input(z.object({
             siteDomain: z.string(),
             superAdmin: z.string(),
-            allowRegistration: z.boolean(),
+            allowRegistrationRequests: z.boolean(),
         }))
         .mutation(async ({ input }) => {
             try {
                 const settings = {
                     setup: true,
                     superadmin: input.superAdmin,
-                    allowRegistration: input.allowRegistration,
+                    allowRegistrationRequests: input.allowRegistrationRequests,
                 }
 
                 await db.siteSettings.upsert({

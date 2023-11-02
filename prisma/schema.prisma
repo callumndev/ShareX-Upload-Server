@@ -49,8 +49,8 @@ model User {
 }
 
 model SiteSettings {
-    site              String  @id
-    setup             Boolean @default(false)
-    superadmin        String
-    allowRegistration Boolean @default(false)
+    site                      String  @id
+    setup                     Boolean @default(false)
+    superadmin                String
+    allowRegistrationRequests Boolean
 }

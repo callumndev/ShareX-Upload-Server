@@ -18,7 +18,7 @@ export default function SiteSetup() {
     const [userID, setUserID] = useState("");
     const [username, setUsername] = useState("");
     const [image, setImage] = useState("");
-    const [registration, setRegistration] = useState(true);
+    const [registrationRequests, setRegistrationRequests] = useState(true);
     const [allowSubmit, setAllowSubmit] = useState(true);
 
     const router = useRouter();
@@ -93,7 +93,7 @@ export default function SiteSetup() {
         setupSiteMutate({
             siteDomain: domain,
             superAdmin: userID,
-            allowRegistration: registration,
+            allowRegistrationRequests: registrationRequests,
         });
     }
 
@@ -177,7 +177,7 @@ export default function SiteSetup() {
 
                                         <div className="col-span-full">
                                             <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
-                                                Allow registration
+                                                Allow registration requests
                                             </label>
                                             <div className="relative flex items-start mt-1">
                                                 <div className="flex h-6 items-center">
@@ -187,16 +187,17 @@ export default function SiteSetup() {
                                                         name="comments"
                                                         type="checkbox"
                                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                                                        checked={registration}
-                                                        onChange={(e) => setRegistration(e.target.checked)}
+                                                        checked={registrationRequests}
+                                                        onChange={(e) => setRegistrationRequests(e.target.checked)}
                                                     />
                                                 </div>
                                                 <div className="ml-3 text-sm leading-6">
                                                     <label htmlFor="comments" className="font-medium text-gray-900">
-                                                        Registration {registration ? "enabled" : "disabled"}
+                                                        Registration {registrationRequests ? "enabled" : "disabled"}
                                                     </label>
                                                     <p id="comments-description" className="text-gray-500">
-                                                        Allow users to submit registration requests when the login for the first time.
+                                                        Allow users to submit registration requests when they login for the first time.
+                                                        Only site admins can view and approve registration requests.
                                                     </p>
                                                 </div>
                                             </div>
