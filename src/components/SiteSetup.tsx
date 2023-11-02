@@ -91,7 +91,6 @@ export default function SiteSetup() {
         e.preventDefault();
 
         setupSiteMutate({
-            siteDomain: domain,
             superAdmin: userID,
             allowRegistrationRequests: registrationRequests,
         });

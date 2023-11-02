@@ -16,7 +16,6 @@ export const siteRouter = createTRPCRouter({
 
     setup: protectedProcedure
         .input(z.object({
-            siteDomain: z.string(),
             superAdmin: z.string(),
             allowRegistrationRequests: z.boolean(),
         }))
