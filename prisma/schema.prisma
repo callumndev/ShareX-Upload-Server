@@ -52,5 +52,5 @@ model SiteSettings {
     site                      String  @id
     setup                     Boolean @default(false)
     superadmin                String
-    allowRegistrationRequests Boolean
+    allowRegistrationRequests Boolean @default(false)
 }
