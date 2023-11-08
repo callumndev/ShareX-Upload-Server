@@ -21,16 +21,32 @@ export const siteRouter = createTRPCRouter({
         }))
         .mutation(async ({ input }) => {
             try {
+                // Get current site settings
+                const storageSettings = await db.siteSettings.findUnique({
+                    where: {
+                        site: env.SITE_DOMAIN,
+                    }
+                });
+
+                // Check if the site has already been setup
+                if (storageSettings?.setup) {
+                    throw new TRPCError({
+                        code: "CONFLICT",
+                        message: "This site has already been setup.",
+                    });
+                }
+
+                // New site settings
                 const settings = {
                     setup: true,
                     superadmin: input.superAdmin,
                     allowRegistrationRequests: input.allowRegistrationRequests,
                 }
 
+                // Update or create new settings for the site
                 await db.siteSettings.upsert({
                     where: {
                         site: env.SITE_DOMAIN,
-                        setup: false,
                     },
                     update: settings,
                     create: {
