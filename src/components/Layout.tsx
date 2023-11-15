@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 
 const navigation = [
     { pageTitle: 'Overview', route: '/', name: 'Overview', href: '/', },
+    { pageTitle: 'Uploads', route: '/uploads', name: 'Uploads', href: '/', },
     { pageTitle: 'All Users', route: '/users', name: 'Users', href: '/users', },
     { pageTitle: 'Site Settings', route: '/settings', name: 'Settings', href: '/settings', },
 ]
