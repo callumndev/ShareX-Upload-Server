@@ -21,6 +21,7 @@ const config = {
             {
                 prefer: "type-imports",
                 fixStyle: "inline-type-imports",
+                disallowTypeAnnotations: false,
             },
         ],
         "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
@@ -30,6 +31,7 @@ const config = {
                 checksVoidReturn: { attributes: false },
             },
         ],
+        "react-hooks/exhaustive-deps": "off",
     },
 };
 
