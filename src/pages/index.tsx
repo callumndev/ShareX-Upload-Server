@@ -281,44 +281,16 @@ export default function Home(
                                                 <h2 className="text-base font-medium text-gray-900" id="recent-uploads-title">
                                                     Recent Uploads
                                                 </h2>
-                                                <div className="mt-6 flow-root">
-                                                    <ul role="list" className="-my-5 divide-y divide-gray-200">
-                                                        {recentUploadsData.map(upload => (
-                                                            <li key={upload.id} className="py-4">
-                                                                <div className="flex items-center space-x-4">
-                                                                    <div className="flex-shrink-0">
-                                                                        <UserAvatar
-                                                                            src={upload.user.avatar}
-                                                                            className="h-8 w-8 rounded-full"
-                                                                            size={32}
-                                                                            fallbackClassName="h-8 w-8 text-gray-300"
-                                                                        />
-                                                                    </div>
-                                                                    <div className="min-w-0 flex-1">
-                                                                        <p className="truncate text-sm font-medium text-gray-900">{upload.user.username}</p>
-                                                                        <p className="truncate text-sm text-gray-500">{format.relativeTime(upload.createdAt, new Date())}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <a
-                                                                            href="#"
-                                                                            className="inline-flex items-center rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                                                        >
-                                                                            View
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                                <div className="mt-6">
-                                                    <a
-                                                        href="/uploads"
-                                                        className="flex w-full items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                                    >
-                                                        View all
-                                                    </a>
-                                                </div>
+                                                {
+                                                    recentUploadsData.length ?
+                                                        <RecentUploads recentUploadsData={recentUploadsData} format={format} /> :
+                                                        (
+                                                            <p className="mt-2 text-sm text-gray-500">
+                                                                Recent uploads from all users across the site will appear here.
+                                                                There are currently no uploads to display.
+                                                            </p>
+                                                        )
+                                                }
                                             </div>
                                         </div>
                                     </section>
@@ -330,4 +302,55 @@ export default function Home(
             </Layout>
         </>
     );
+}
+
+function RecentUploads({
+    recentUploadsData,
+    format
+}: {
+    recentUploadsData: UploadGetRecentOutput;
+    format: ReturnType<typeof useFormatter>;
+}) {
+    return (
+        <>
+            <div className="mt-6 flow-root">
+                <ul role="list" className="-my-5 divide-y divide-gray-200">
+                    {recentUploadsData.map(upload => (
+                        <li key={upload.id} className="py-4">
+                            <div className="flex items-center space-x-4">
+                                <div className="flex-shrink-0">
+                                    <UserAvatar
+                                        src={upload.user.avatar}
+                                        className="h-8 w-8 rounded-full"
+                                        size={32}
+                                        fallbackClassName="h-8 w-8 text-gray-300"
+                                    />
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                    <p className="truncate text-sm font-medium text-gray-900">{upload.user.username}</p>
+                                    <p className="truncate text-sm text-gray-500">{format.relativeTime(upload.createdAt, new Date())}</p>
+                                </div>
+                                <div>
+                                    <a
+                                        href="#"
+                                        className="inline-flex items-center rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                    >
+                                        View
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className="mt-6" hidden={true}>
+                <a
+                    href="/uploads"
+                    className="flex w-full items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >
+                    View all
+                </a>
+            </div>
+        </>
+    )
 }
