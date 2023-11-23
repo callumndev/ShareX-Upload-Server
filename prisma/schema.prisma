@@ -13,8 +13,12 @@ model User {
     username String
     avatar   String
 
+    joinedAt DateTime @default(now())
+
     auth_session Session[]
     key          Key[]
+
+    uploads Upload[]
 }
 
 model Session {
@@ -43,4 +47,20 @@ model SiteSettings {
     setup                     Boolean @default(false)
     superadmin                String
     allowRegistrationRequests Boolean @default(false)
+}
+
+model Upload {
+    id       String @id @unique @default(uuid())
+    filename String
+    mimetype String
+    content  String
+    size     Int
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    user_id String
+    user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+    @@index([user_id])
 }

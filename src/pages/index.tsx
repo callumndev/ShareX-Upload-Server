@@ -4,6 +4,9 @@ import type {
     GetServerSidePropsResult,
     InferGetServerSidePropsType
 } from "next";
+import { useEffect, useState } from "react";
+
+import { useFormatter } from "next-intl";
 
 import clsx from 'clsx';
 
@@ -23,6 +26,7 @@ import Layout from "@/components/Layout";
 import UserAvatar from "@/components/UserAvatar";
 
 import loginRedirectWithOrigin from "@/utils/auth/loginRedirectWithOrigin";
+import { api } from "@/utils/api";
 
 export const getServerSideProps = async (
     context: GetServerSidePropsContext
@@ -62,11 +66,6 @@ export const getServerSideProps = async (
     }
 }
 
-const stats = [
-    { label: 'Uploads', value: 416 },
-    { label: 'Last Uploaded', value: '41 minutes ago' },
-    { label: 'Joined', value: '2 years ago' },
-]
 const actions = [
     {
         icon: FolderOpenIcon,
@@ -132,6 +131,46 @@ export default function Home(
     { user }:
         InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
+    const format = useFormatter();
+
+    const [uploads, setUploads] = useState('');
+    const [lastUploadedDate, setLastUploadedDate] = useState('');
+    const [joinedDate, setJoinedDate] = useState('');
+
+    const [uploadCount, lastUploaded, joined] = api.useQueries(t => [
+        t.user.getUploadCount(),
+        t.user.getLastUploadDate(),
+        t.user.getJoinedDate(),
+    ])
+
+    useEffect(() => {
+        // Update upload count
+        if (uploadCount.fetchStatus == 'idle' && uploadCount.isSuccess)
+            setUploads(uploadCount.data.toString());
+
+        // Last uploaded date
+        if (lastUploaded.fetchStatus == 'idle' && lastUploaded.isSuccess) {
+            if (lastUploaded.data)
+                setLastUploadedDate(format.relativeTime(lastUploaded.data, new Date()));
+            else
+                setLastUploadedDate('never');
+        }
+
+        // Joined date
+        if (joined.fetchStatus == 'idle' && joined.isSuccess) {
+            if (joined.data)
+                setJoinedDate(format.relativeTime(joined.data, new Date()));
+            else
+                setJoinedDate('unknown');
+        }
+    }, [uploadCount, lastUploaded])
+
+    const stats = [
+        { label: 'Uploads', value: uploads },
+        { label: 'Last Uploaded', value: lastUploadedDate },
+        { label: 'Joined', value: joinedDate },
+    ]
+
     return (
         <>
             <Layout user={user}>

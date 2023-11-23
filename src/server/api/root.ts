@@ -1,6 +1,7 @@
 import type { GetServerSidePropsContext } from "next";
 
 import { siteRouter } from "@/server/api/routers/site";
+import { userRouter } from "@/server/api/routers/user";
 import { createTRPCRouter } from "@/server/api/trpc";
 import { auth } from "@/server/auth";
 import { db } from "@/server/db";
@@ -12,6 +13,7 @@ import { db } from "@/server/db";
  */
 export const appRouter = createTRPCRouter({
     site: siteRouter,
+    user: userRouter,
 });
 
 // export type definition of API
