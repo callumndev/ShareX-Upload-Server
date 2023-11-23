@@ -26,7 +26,7 @@ import Layout from "@/components/Layout";
 import UserAvatar from "@/components/UserAvatar";
 
 import loginRedirectWithOrigin from "@/utils/auth/loginRedirectWithOrigin";
-import { api } from "@/utils/api";
+import { type UploadGetRecentOutput, api } from "@/utils/api";
 
 export const getServerSideProps = async (
     context: GetServerSidePropsContext
@@ -100,32 +100,6 @@ const actions = [
         iconBackground: "bg-purple-50",
     },
 ]
-const recentUploads = [
-    {
-        name: "999_ash_999",
-        handle: "41 minutes ago",
-        imageUrl: "https://cdn.discordapp.com/embed/avatars/3.png",
-        href: "#",
-    },
-    {
-        name: "lzz",
-        handle: "12 hours ago",
-        imageUrl: "https://cdn.discordapp.com/embed/avatars/1.png",
-        href: "#",
-    },
-    {
-        name: "999_ash_999",
-        handle: "2 days ago",
-        imageUrl: "https://cdn.discordapp.com/embed/avatars/3.png",
-        href: "#",
-    },
-    {
-        name: "sam00001",
-        handle: "5 days ago",
-        imageUrl: "https://cdn.discordapp.com/embed/avatars/2.png",
-        href: "#",
-    },
-]
 
 export default function Home(
     { user }:
@@ -133,15 +107,21 @@ export default function Home(
 ) {
     const format = useFormatter();
 
+
     const [uploads, setUploads] = useState("");
     const [lastUploadedDate, setLastUploadedDate] = useState("");
     const [joinedDate, setJoinedDate] = useState("");
+
+    const [recentUploadsData, setRecentUploadsData] = useState<UploadGetRecentOutput>([]);
 
     const [uploadCount, lastUploaded, joined] = api.useQueries(t => [
         t.user.getUploadCount(),
         t.user.getLastUploadDate(),
         t.user.getJoinedDate(),
     ])
+
+    const recentUploads = api.upload.getRecent.useQuery()
+
 
     useEffect(() => {
         // Update upload count
@@ -163,7 +143,13 @@ export default function Home(
             else
                 setJoinedDate("unknown");
         }
+
+        // Recent uploads
+        if (recentUploads.fetchStatus == "idle" && recentUploads.isSuccess) {
+            setRecentUploadsData(recentUploads.data);
+        }
     }, [uploadCount, lastUploaded])
+
 
     const stats = [
         { label: "Uploads", value: uploads },
@@ -297,24 +283,24 @@ export default function Home(
                                                 </h2>
                                                 <div className="mt-6 flow-root">
                                                     <ul role="list" className="-my-5 divide-y divide-gray-200">
-                                                        {recentUploads.map((person) => (
-                                                            <li key={person.handle} className="py-4">
+                                                        {recentUploadsData.map(upload => (
+                                                            <li key={upload.id} className="py-4">
                                                                 <div className="flex items-center space-x-4">
                                                                     <div className="flex-shrink-0">
                                                                         <UserAvatar
-                                                                            src={person.imageUrl}
+                                                                            src={upload.user.avatar}
                                                                             className="h-8 w-8 rounded-full"
                                                                             size={32}
                                                                             fallbackClassName="h-8 w-8 text-gray-300"
                                                                         />
                                                                     </div>
                                                                     <div className="min-w-0 flex-1">
-                                                                        <p className="truncate text-sm font-medium text-gray-900">{person.name}</p>
-                                                                        <p className="truncate text-sm text-gray-500">{person.handle}</p>
+                                                                        <p className="truncate text-sm font-medium text-gray-900">{upload.user.username}</p>
+                                                                        <p className="truncate text-sm text-gray-500">{format.relativeTime(upload.createdAt, new Date())}</p>
                                                                     </div>
                                                                     <div>
                                                                         <a
-                                                                            href={person.href}
+                                                                            href="#"
                                                                             className="inline-flex items-center rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                                                                         >
                                                                             View
