@@ -8,14 +8,14 @@ import { useEffect, useState } from "react";
 
 import { useFormatter } from "next-intl";
 
-import clsx from 'clsx';
+import clsx from "clsx";
 
 import {
     ArrowDownTrayIcon,
     Cog6ToothIcon,
     FolderOpenIcon,
     UserPlusIcon
-} from '@heroicons/react/24/outline';
+} from "@heroicons/react/24/outline";
 
 import type { User } from "lucia";
 
@@ -53,7 +53,7 @@ export const getServerSideProps = async (
     if (!settings?.setup) {
         return {
             redirect: {
-                destination: '/setup',
+                destination: "/setup",
                 permanent: false
             }
         }
@@ -69,61 +69,61 @@ export const getServerSideProps = async (
 const actions = [
     {
         icon: FolderOpenIcon,
-        name: 'My Uploads',
-        text: 'View all the uploads you have submitted.',
-        href: '#',
-        iconForeground: 'text-purple-500',
-        iconBackground: 'bg-purple-50',
+        name: "My Uploads",
+        text: "View all the uploads you have submitted.",
+        href: "#",
+        iconForeground: "text-purple-500",
+        iconBackground: "bg-purple-50",
     },
     {
         icon: ArrowDownTrayIcon,
-        name: 'Download',
-        text: 'Download the ShareX configuration file (.sxcu) for this site and account.',
-        href: '#',
-        iconForeground: 'text-purple-500',
-        iconBackground: 'bg-purple-50',
+        name: "Download",
+        text: "Download the ShareX configuration file (.sxcu) for this site and account.",
+        href: "#",
+        iconForeground: "text-purple-500",
+        iconBackground: "bg-purple-50",
     },
     {
         icon: UserPlusIcon,
-        name: 'Registration Requests',
-        text: 'Manage pending registration requests from users. (Admin only)',
-        href: '#',
-        iconForeground: 'text-purple-500',
-        iconBackground: 'bg-purple-50',
+        name: "Registration Requests",
+        text: "Manage pending registration requests from users. (Admin only)",
+        href: "#",
+        iconForeground: "text-purple-500",
+        iconBackground: "bg-purple-50",
     },
     {
         icon: Cog6ToothIcon,
-        name: 'Settings',
-        text: 'Manage the global settings for the site. (Admin only)',
-        href: '#',
-        iconForeground: 'text-purple-500',
-        iconBackground: 'bg-purple-50',
+        name: "Settings",
+        text: "Manage the global settings for the site. (Admin only)",
+        href: "#",
+        iconForeground: "text-purple-500",
+        iconBackground: "bg-purple-50",
     },
 ]
 const recentUploads = [
     {
-        name: '999_ash_999',
-        handle: '41 minutes ago',
-        imageUrl: 'https://cdn.discordapp.com/embed/avatars/3.png',
-        href: '#',
+        name: "999_ash_999",
+        handle: "41 minutes ago",
+        imageUrl: "https://cdn.discordapp.com/embed/avatars/3.png",
+        href: "#",
     },
     {
-        name: 'lzz',
-        handle: '12 hours ago',
-        imageUrl: 'https://cdn.discordapp.com/embed/avatars/1.png',
-        href: '#',
+        name: "lzz",
+        handle: "12 hours ago",
+        imageUrl: "https://cdn.discordapp.com/embed/avatars/1.png",
+        href: "#",
     },
     {
-        name: '999_ash_999',
-        handle: '2 days ago',
-        imageUrl: 'https://cdn.discordapp.com/embed/avatars/3.png',
-        href: '#',
+        name: "999_ash_999",
+        handle: "2 days ago",
+        imageUrl: "https://cdn.discordapp.com/embed/avatars/3.png",
+        href: "#",
     },
     {
-        name: 'sam00001',
-        handle: '5 days ago',
-        imageUrl: 'https://cdn.discordapp.com/embed/avatars/2.png',
-        href: '#',
+        name: "sam00001",
+        handle: "5 days ago",
+        imageUrl: "https://cdn.discordapp.com/embed/avatars/2.png",
+        href: "#",
     },
 ]
 
@@ -133,9 +133,9 @@ export default function Home(
 ) {
     const format = useFormatter();
 
-    const [uploads, setUploads] = useState('');
-    const [lastUploadedDate, setLastUploadedDate] = useState('');
-    const [joinedDate, setJoinedDate] = useState('');
+    const [uploads, setUploads] = useState("");
+    const [lastUploadedDate, setLastUploadedDate] = useState("");
+    const [joinedDate, setJoinedDate] = useState("");
 
     const [uploadCount, lastUploaded, joined] = api.useQueries(t => [
         t.user.getUploadCount(),
@@ -145,30 +145,30 @@ export default function Home(
 
     useEffect(() => {
         // Update upload count
-        if (uploadCount.fetchStatus == 'idle' && uploadCount.isSuccess)
+        if (uploadCount.fetchStatus == "idle" && uploadCount.isSuccess)
             setUploads(uploadCount.data.toString());
 
         // Last uploaded date
-        if (lastUploaded.fetchStatus == 'idle' && lastUploaded.isSuccess) {
+        if (lastUploaded.fetchStatus == "idle" && lastUploaded.isSuccess) {
             if (lastUploaded.data)
                 setLastUploadedDate(format.relativeTime(lastUploaded.data, new Date()));
             else
-                setLastUploadedDate('never');
+                setLastUploadedDate("never");
         }
 
         // Joined date
-        if (joined.fetchStatus == 'idle' && joined.isSuccess) {
+        if (joined.fetchStatus == "idle" && joined.isSuccess) {
             if (joined.data)
                 setJoinedDate(format.relativeTime(joined.data, new Date()));
             else
-                setJoinedDate('unknown');
+                setJoinedDate("unknown");
         }
     }, [uploadCount, lastUploaded])
 
     const stats = [
-        { label: 'Uploads', value: uploads },
-        { label: 'Last Uploaded', value: lastUploadedDate },
-        { label: 'Joined', value: joinedDate },
+        { label: "Uploads", value: uploads },
+        { label: "Last Uploaded", value: lastUploadedDate },
+        { label: "Joined", value: joinedDate },
     ]
 
     return (
@@ -224,7 +224,7 @@ export default function Home(
                                             <div className="grid grid-cols-1 divide-y divide-gray-200 border-t border-gray-200 bg-gray-50 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                                                 {stats.map((stat) => (
                                                     <div key={stat.label} className="px-6 py-5 text-center text-sm font-medium">
-                                                        <span className="text-gray-900">{stat.value}</span>{' '}
+                                                        <span className="text-gray-900">{stat.value}</span>{" "}
                                                         <span className="text-gray-600">{stat.label}</span>
                                                     </div>
                                                 ))}
@@ -242,11 +242,11 @@ export default function Home(
                                                 <div
                                                     key={action.name}
                                                     className={clsx(
-                                                        actionIdx === 0 ? 'rounded-tl-lg rounded-tr-lg sm:rounded-tr-none' : '',
-                                                        actionIdx === 1 ? 'sm:rounded-tr-lg' : '',
-                                                        actionIdx === actions.length - 2 ? 'sm:rounded-bl-lg' : '',
-                                                        actionIdx === actions.length - 1 ? 'rounded-bl-lg rounded-br-lg sm:rounded-bl-none' : '',
-                                                        'group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-cyan-500'
+                                                        actionIdx === 0 ? "rounded-tl-lg rounded-tr-lg sm:rounded-tr-none" : "",
+                                                        actionIdx === 1 ? "sm:rounded-tr-lg" : "",
+                                                        actionIdx === actions.length - 2 ? "sm:rounded-bl-lg" : "",
+                                                        actionIdx === actions.length - 1 ? "rounded-bl-lg rounded-br-lg sm:rounded-bl-none" : "",
+                                                        "group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-cyan-500"
                                                     )}
                                                 >
                                                     <div>
@@ -254,7 +254,7 @@ export default function Home(
                                                             className={clsx(
                                                                 action.iconBackground,
                                                                 action.iconForeground,
-                                                                'inline-flex rounded-lg p-3 ring-4 ring-white'
+                                                                "inline-flex rounded-lg p-3 ring-4 ring-white"
                                                             )}
                                                         >
                                                             <action.icon className="h-6 w-6" aria-hidden="true" />

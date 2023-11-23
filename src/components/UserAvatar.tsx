@@ -3,7 +3,7 @@ import type { ImageProps } from "next/image";
 
 import { useState } from "react";
 
-import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { UserCircleIcon } from "@heroicons/react/24/solid";
 
 export default function UserAvatar(
     {
@@ -29,7 +29,7 @@ export default function UserAvatar(
                 alt="user avatar"
 
                 // Controls the size of the image returned
-                // from Next.js' image optimization
+                // from Next.js image optimization
                 width={size}
                 height={size}
 

@@ -8,7 +8,7 @@ import type { NextApiRequest } from "next";
  * @returns boolean whether the origin is valid
  */
 export default function validateLoginOrigin(req: NextApiRequest, origin: string): boolean {
-    const protocol: "https" | "http" = req.headers['x-forwarded-proto'] == 'https' ? 'https' : 'http';
+    const protocol: "https" | "http" = req.headers["x-forwarded-proto"] == "https" ? "https" : "http";
 
     try {
         const originURL = new URL(origin);

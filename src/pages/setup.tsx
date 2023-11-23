@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import type {
     GetServerSidePropsContext,
     GetServerSidePropsResult,
@@ -8,21 +8,21 @@ import type {
 
 import type { User } from "lucia";
 
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 
-import { InformationCircleIcon } from '@heroicons/react/24/solid'
+import { InformationCircleIcon } from "@heroicons/react/24/solid"
 
 import { createCaller } from "@/server/api/root";
 import { auth } from "@/server/auth";
 
 import Layout from "@/components/Layout";
-import ToastError from '@/components/ToastError';
-import ToastSuccess from '@/components/ToastSuccess';
+import ToastError from "@/components/ToastError";
+import ToastSuccess from "@/components/ToastSuccess";
 import UserAvatar from "@/components/UserAvatar";
 
-import { api } from '@/utils/api';
-import { logout } from '@/utils/auth/actions';
+import { api } from "@/utils/api";
+import { logout } from "@/utils/auth/actions";
 import loginRedirectWithOrigin from "@/utils/auth/loginRedirectWithOrigin";
 
 export const getServerSideProps = async (
@@ -50,7 +50,7 @@ export const getServerSideProps = async (
     if (settings?.setup) {
         return {
             redirect: {
-                destination: '/',
+                destination: "/",
                 permanent: false
             }
         }
@@ -85,9 +85,9 @@ export default function Home(
 
     useEffect(() => {
         // Wait until status has finished loading
-        if (siteDomain.status != 'loading') {
+        if (siteDomain.status != "loading") {
             // Check success status
-            if (siteDomain.status == 'success' && domain == "") {
+            if (siteDomain.status == "success" && domain == "") {
                 setDomain(siteDomain.data);
                 setAllowSubmit(true);
             }
@@ -105,7 +105,7 @@ export default function Home(
                     message={setupSiteError.message}
                 />
             ));
-        } else if (setupSiteMutateStatus == 'success') {
+        } else if (setupSiteMutateStatus == "success") {
             // Disable submit button
             setAllowSubmit(false);
 
@@ -174,7 +174,7 @@ export default function Home(
                                                 <InformationCircleIcon className="h-5 w-5 text-blue-400" aria-hidden="true" />
                                             </div>
                                             <div className="ml-3 flex-1 md:flex md:justify-between">
-                                                <p className="text-sm text-blue-700">The site domain is controlled from the <span className='font-bold'>SITE_DOMAIN</span> environment variable.</p>
+                                                <p className="text-sm text-blue-700">The site domain is controlled from the <span className="font-bold">SITE_DOMAIN</span> environment variable.</p>
                                             </div>
                                         </div>
                                     </div>

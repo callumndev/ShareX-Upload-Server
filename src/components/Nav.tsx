@@ -1,26 +1,26 @@
-import { useRouter } from 'next/router';
-import { Fragment } from 'react';
+import { useRouter } from "next/router";
+import { Fragment } from "react";
 
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 
-import type { User } from 'lucia';
+import type { User } from "lucia";
 
-import UserAvatar from '@/components/UserAvatar';
+import UserAvatar from "@/components/UserAvatar";
 
-import { logout } from '@/utils/auth/actions';
+import { logout } from "@/utils/auth/actions";
 
 export const navigation = [
-    { pageTitle: 'Overview', route: '/', name: 'Overview', href: '/', },
-    { pageTitle: 'Uploads', route: '/uploads', name: 'Uploads', href: '/', },
-    { pageTitle: 'All Users', route: '/users', name: 'Users', href: '/users', },
-    { pageTitle: 'Site Settings', route: '/settings', name: 'Settings', href: '/settings', },
+    { pageTitle: "Overview", route: "/", name: "Overview", href: "/", },
+    { pageTitle: "Uploads", route: "/uploads", name: "Uploads", href: "/", },
+    { pageTitle: "All Users", route: "/users", name: "Users", href: "/users", },
+    { pageTitle: "Site Settings", route: "/settings", name: "Settings", href: "/settings", },
 ]
 const userNavigation = [
-    { name: 'Your Profile', href: '/me/profile' },
-    { name: 'Settings', href: '/me/settings' },
-    { name: 'Sign out', href: '#', onClick: () => void logout() },
+    { name: "Your Profile", href: "/me/profile" },
+    { name: "Settings", href: "/me/settings" },
+    { name: "Sign out", href: "#", onClick: () => void logout() },
 ]
 
 export default function Nav(
@@ -47,11 +47,11 @@ export default function Nav(
                                                 href={item.href}
                                                 className={clsx(
                                                     item.route == currentNav?.route
-                                                        ? 'border-indigo-500 text-gray-900'
-                                                        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
-                                                    'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium'
+                                                        ? "border-indigo-500 text-gray-900"
+                                                        : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
+                                                    "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
                                                 )}
-                                                aria-current={item.route == currentNav?.route ? 'page' : undefined}
+                                                aria-current={item.route == currentNav?.route ? "page" : undefined}
                                             >
                                                 {item.name}
                                             </a>
@@ -98,8 +98,8 @@ export default function Nav(
                                                             <a
                                                                 href={item.href}
                                                                 className={clsx(
-                                                                    active ? 'bg-gray-100' : '',
-                                                                    'block px-4 py-2 text-sm text-gray-700'
+                                                                    active ? "bg-gray-100" : "",
+                                                                    "block px-4 py-2 text-sm text-gray-700"
                                                                 )}
                                                                 onClick={() => {
                                                                     if (item.onClick) {
@@ -140,11 +140,11 @@ export default function Nav(
                                         href={item.href}
                                         className={clsx(
                                             item.route == currentNav?.route
-                                                ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                                                : 'border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800',
-                                            'block border-l-4 py-2 pl-3 pr-4 text-base font-medium'
+                                                ? "border-indigo-500 bg-indigo-50 text-indigo-700"
+                                                : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800",
+                                            "block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
                                         )}
-                                        aria-current={item.route == currentNav?.route ? 'page' : undefined}
+                                        aria-current={item.route == currentNav?.route ? "page" : undefined}
                                     >
                                         {item.name}
                                     </Disclosure.Button>

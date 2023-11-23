@@ -1,6 +1,6 @@
-import { CheckCircleIcon } from '@heroicons/react/20/solid'
+import { CheckCircleIcon } from "@heroicons/react/20/solid"
 
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 export default function ToastSuccess({
     id,
@@ -16,7 +16,7 @@ export default function ToastSuccess({
     return (
         <>
             <div
-                className={`${visible ? 'animate-enter' : 'animate-leave'
+                className={`${visible ? "animate-enter" : "animate-leave"
                     } max-w-md w-full bg-red shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
             >
                 <div className="w-full rounded-md bg-green-50 p-4">

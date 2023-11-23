@@ -1,6 +1,6 @@
-import { XCircleIcon } from '@heroicons/react/20/solid'
+import { XCircleIcon } from "@heroicons/react/20/solid"
 
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 export default function ToastError({
     id,
@@ -16,7 +16,7 @@ export default function ToastError({
     return (
         <>
             <div
-                className={`${visible ? 'animate-enter' : 'animate-leave'
+                className={`${visible ? "animate-enter" : "animate-leave"
                     } max-w-md w-full bg-red shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
             >
                 <div className="w-full rounded-md bg-red-50 p-4">

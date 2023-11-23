@@ -1,6 +1,6 @@
 import type { GetServerSidePropsContext } from "next";
 
-import { buildUrl } from 'build-url-ts';
+import { buildUrl } from "build-url-ts";
 
 /**
  * Returning the result of this function from getServerSideProps will redirect the user
@@ -9,7 +9,7 @@ import { buildUrl } from 'build-url-ts';
  * @returns object to return from getServerSideProps
  */
 export default function loginRedirectWithOrigin(ctx: GetServerSidePropsContext) {
-    const protocol: "https" | "http" = ctx.req.headers['x-forwarded-proto'] == 'https' ? 'https' : 'http';
+    const protocol: "https" | "http" = ctx.req.headers["x-forwarded-proto"] == "https" ? "https" : "http";
     const host = `${protocol}://${ctx.req.headers.host}`;
 
     return {

@@ -1,14 +1,14 @@
 /**
  * Redirects the user to the login API with the origin parameter.
- * @param origin string (optional). Defaults to '/' (index). The page to redirect to after login.
+ * @param origin string (optional). Defaults to "/" (index). The page to redirect to after login.
  * @returns void
  */
 export function login(origin?: string) {
     if (!origin)
-        origin = '/' // index
+        origin = "/" // index
 
     // Only run on client
-    if (typeof window == 'undefined')
+    if (typeof window == "undefined")
         return;
 
     // Redirect to login API
@@ -29,7 +29,7 @@ export async function logout() {
     // 0 status code means redirect
     if (response.status === 0) {
         // Only run on client
-        if (typeof window == 'undefined')
+        if (typeof window == "undefined")
             return;
 
         // Redirect to home page

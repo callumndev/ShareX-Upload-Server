@@ -4,6 +4,6 @@ export default {
     content: ["./src/**/*.tsx"],
     theme: {},
     plugins: [
-        require('@tailwindcss/forms'),
+        require("@tailwindcss/forms"),
     ],
 } satisfies Config;

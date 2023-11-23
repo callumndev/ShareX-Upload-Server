@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	if (
 		(!storedState || !state) || // Check we have two valid states
 		storedState != state || // Check the two states match
-		typeof code != 'string' // Check we have a valid code
+		typeof code != "string" // Check we have a valid code
 	) {
 		res.status(400).end();
 		return;
@@ -76,7 +76,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		authRequest.setSession(session);
 
 		// Get existing response cookies
-		const resCookies: string[] = res.getHeader('Set-Cookie') as string[] ?? [];
+		const resCookies: string[] = res.getHeader("Set-Cookie") as string[] ?? [];
 
 		// Delete state cookie
 		resCookies.push(serializeCookie("discord_oauth_state", "", {

@@ -24,7 +24,7 @@ export const discordAuth = discord(auth, {
 	clientId: env.DISCORD_CLIENT_ID,
 	clientSecret: env.DISCORD_CLIENT_SECRET,
 	redirectUri: env.DISCORD_REDIRECT_URI,
-	scope: ['identify']
+	scope: ["identify"]
 });
 
 export type Auth = typeof auth;

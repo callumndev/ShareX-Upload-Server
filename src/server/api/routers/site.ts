@@ -55,7 +55,7 @@ export const siteRouter = createTRPCRouter({
                     },
                 });
             } catch (e) {
-                console.error(`Error saving site settings for site '${env.SITE_DOMAIN}':`, e);
+                console.error(`Error saving site settings for site "${env.SITE_DOMAIN}":`, e);
                 throw new TRPCError({
                     code: "INTERNAL_SERVER_ERROR",
                     message: getErrorMessage(e),

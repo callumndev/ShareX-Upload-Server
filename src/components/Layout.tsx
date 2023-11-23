@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
-import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react'
+import { useRouter } from "next/router";
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react"
 
-import type { User } from 'lucia';
+import type { User } from "lucia";
 
-import Nav, { navigation } from '@/components/Nav';
+import Nav, { navigation } from "@/components/Nav";
 
 export default function Layout(
     { children, user, hideNavigation = false }:
@@ -17,7 +17,7 @@ export default function Layout(
     const router = useRouter();
     const currentNav = navigation.find(nav => nav.route == router.route);
 
-    const [pageTitle, setPageTitle] = useState('');
+    const [pageTitle, setPageTitle] = useState("");
 
     useEffect(() => {
         // Set page title
