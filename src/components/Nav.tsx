@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
@@ -7,6 +6,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 
 import type { User } from 'lucia';
+
+import UserAvatar from '@/components/UserAvatar';
 
 import { logout } from '@/utils/auth/actions';
 
@@ -73,12 +74,11 @@ export default function Nav(
                                             <Menu.Button className="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                 <span className="absolute -inset-1.5" />
                                                 <span className="sr-only">Open user menu</span>
-                                                <Image
-                                                    className="h-8 w-8 rounded-full"
+                                                <UserAvatar
                                                     src={user.avatar}
-                                                    alt=""
-                                                    width={32}
-                                                    height={32}
+                                                    className="h-8 w-8 rounded-full"
+                                                    size={32}
+                                                    fallbackClassName="h-10 w-10 text-gray-300"
                                                 />
                                             </Menu.Button>
                                         </div>
@@ -153,12 +153,11 @@ export default function Nav(
                             <div className="border-t border-gray-200 pb-3 pt-4">
                                 <div className="flex items-center px-4">
                                     <div className="flex-shrink-0">
-                                        <Image
-                                            className="h-10 w-10 rounded-full"
+                                        <UserAvatar
                                             src={user.avatar}
-                                            alt=""
-                                            width={40}
-                                            height={40}
+                                            className="h-10 w-10 rounded-full"
+                                            size={40}
+                                            fallbackClassName="h-12 w-12 text-gray-300"
                                         />
                                     </div>
                                     <div className="ml-3">

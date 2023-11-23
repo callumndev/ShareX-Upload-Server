@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import type {
     GetServerSidePropsContext,
     GetServerSidePropsResult,
@@ -21,6 +20,7 @@ import { auth } from "@/server/auth";
 import { createCaller } from "@/server/api/root";
 
 import Layout from "@/components/Layout";
+import UserAvatar from "@/components/UserAvatar";
 
 import loginRedirectWithOrigin from "@/utils/auth/loginRedirectWithOrigin";
 
@@ -159,12 +159,11 @@ export default function Home(
                                                 <div className="sm:flex sm:items-center sm:justify-between">
                                                     <div className="sm:flex sm:space-x-5">
                                                         <div className="flex-shrink-0">
-                                                            <Image
+                                                            <UserAvatar
                                                                 src={user.avatar}
-                                                                alt="user avatar"
                                                                 className="mx-auto h-20 w-20 rounded-full"
-                                                                width={80}
-                                                                height={80}
+                                                                size={80}
+                                                                fallbackClassName="h-20 w-20 text-gray-300"
                                                             />
                                                         </div>
                                                         <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
@@ -263,12 +262,11 @@ export default function Home(
                                                             <li key={person.handle} className="py-4">
                                                                 <div className="flex items-center space-x-4">
                                                                     <div className="flex-shrink-0">
-                                                                        <Image
+                                                                        <UserAvatar
                                                                             src={person.imageUrl}
-                                                                            alt="person avatar"
                                                                             className="h-8 w-8 rounded-full"
-                                                                            width={32}
-                                                                            height={32}
+                                                                            size={32}
+                                                                            fallbackClassName="h-8 w-8 text-gray-300"
                                                                         />
                                                                     </div>
                                                                     <div className="min-w-0 flex-1">

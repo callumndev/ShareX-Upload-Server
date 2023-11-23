@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import type {
     GetServerSidePropsContext,
@@ -12,7 +11,7 @@ import type { User } from "lucia";
 import toast from 'react-hot-toast';
 import { useEffect, useState } from "react";
 
-import { InformationCircleIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import { InformationCircleIcon } from '@heroicons/react/24/solid'
 
 import { createCaller } from "@/server/api/root";
 import { auth } from "@/server/auth";
@@ -20,6 +19,7 @@ import { auth } from "@/server/auth";
 import Layout from "@/components/Layout";
 import ToastError from '@/components/ToastError';
 import ToastSuccess from '@/components/ToastSuccess';
+import UserAvatar from "@/components/UserAvatar";
 
 import { api } from '@/utils/api';
 import { logout } from '@/utils/auth/actions';
@@ -210,17 +210,12 @@ export default function Home(
                                                     Super admin user
                                                 </label>
                                                 <div className="mt-2 flex items-center gap-x-3">
-                                                    {
-                                                        (!user.avatar || user.avatar == "") ?
-                                                            <UserCircleIcon className="h-12 w-12 text-gray-300" aria-hidden="true" /> :
-                                                            <Image
-                                                                className="inline-block h-10 w-10 rounded-full"
-                                                                src={user.avatar}
-                                                                alt="user avatar"
-                                                                width={48}
-                                                                height={48}
-                                                            />
-                                                    }
+                                                    <UserAvatar
+                                                        src={user.avatar}
+                                                        className="inline-block h-10 w-10 rounded-full"
+                                                        size={48}
+                                                        fallbackClassName="h-12 w-12 text-gray-300"
+                                                    />
                                                     <p>{user.discordUsername}</p>
 
                                                     <button
