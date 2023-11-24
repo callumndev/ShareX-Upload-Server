@@ -232,7 +232,7 @@ export default function Home(
                                                         actionIdx === 1 ? "sm:rounded-tr-lg" : "",
                                                         actionIdx === actions.length - 2 ? "sm:rounded-bl-lg" : "",
                                                         actionIdx === actions.length - 1 ? "rounded-bl-lg rounded-br-lg sm:rounded-bl-none" : "",
-                                                        "group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-cyan-500"
+                                                        "group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-purple-500"
                                                     )}
                                                 >
                                                     <div>
