@@ -6,8 +6,6 @@ import type {
 } from "next";
 import { useEffect, useState } from "react";
 
-import { useFormatter } from "next-intl";
-
 import clsx from "clsx";
 
 import {
@@ -27,6 +25,7 @@ import UserAvatar from "@/components/UserAvatar";
 
 import loginRedirectWithOrigin from "@/utils/auth/loginRedirectWithOrigin";
 import { type UploadGetRecentOutput, api } from "@/utils/api";
+import moment from "moment";
 
 export const getServerSideProps = async (
     context: GetServerSidePropsContext
@@ -105,9 +104,6 @@ export default function Home(
     { user }:
         InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
-    const format = useFormatter();
-
-
     const [uploads, setUploads] = useState("");
     const [lastUploadedDate, setLastUploadedDate] = useState("");
     const [joinedDate, setJoinedDate] = useState("");
@@ -131,7 +127,7 @@ export default function Home(
         // Last uploaded date
         if (lastUploaded.fetchStatus == "idle" && lastUploaded.isSuccess) {
             if (lastUploaded.data)
-                setLastUploadedDate(format.relativeTime(lastUploaded.data, new Date()));
+                setLastUploadedDate(moment(lastUploaded.data).fromNow());
             else
                 setLastUploadedDate("never");
         }
@@ -139,7 +135,7 @@ export default function Home(
         // Joined date
         if (joined.fetchStatus == "idle" && joined.isSuccess) {
             if (joined.data)
-                setJoinedDate(format.relativeTime(joined.data, new Date()));
+                setJoinedDate(moment(joined.data).fromNow());
             else
                 setJoinedDate("unknown");
         }
@@ -283,7 +279,7 @@ export default function Home(
                                                 </h2>
                                                 {
                                                     recentUploadsData.length ?
-                                                        <RecentUploads recentUploadsData={recentUploadsData} format={format} /> :
+                                                        <RecentUploads recentUploadsData={recentUploadsData} /> :
                                                         (
                                                             <p className="mt-2 text-sm text-gray-500">
                                                                 Recent uploads from all users across the site will appear here.
@@ -306,10 +302,8 @@ export default function Home(
 
 function RecentUploads({
     recentUploadsData,
-    format
 }: {
     recentUploadsData: UploadGetRecentOutput;
-    format: ReturnType<typeof useFormatter>;
 }) {
     return (
         <>
@@ -328,7 +322,7 @@ function RecentUploads({
                                 </div>
                                 <div className="min-w-0 flex-1">
                                     <p className="truncate text-sm font-medium text-gray-900">{upload.user.username}</p>
-                                    <p className="truncate text-sm text-gray-500">{format.relativeTime(upload.createdAt, new Date())}</p>
+                                    <p className="truncate text-sm text-gray-500">{moment(upload.createdAt).fromNow()}</p>
                                 </div>
                                 <div>
                                     <a

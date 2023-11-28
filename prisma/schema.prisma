@@ -13,6 +13,9 @@ model User {
     username String
     avatar   String
 
+    role   String  @default("user")
+    banned Boolean @default(false)
+
     joinedAt DateTime @default(now())
 
     auth_session Session[]
