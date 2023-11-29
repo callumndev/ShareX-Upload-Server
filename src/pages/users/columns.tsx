@@ -13,7 +13,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/DropdownMenu"
 import Role from "@/components/Role"
-import { Checkbox } from "@/components/checkbox"
+import { Checkbox } from "@/components/Checkbox"
 
 import type { UserGetAllUsersOutputItem } from "@/utils/api"
 
