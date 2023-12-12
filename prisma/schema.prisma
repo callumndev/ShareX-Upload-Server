@@ -22,6 +22,9 @@ model User {
     key          Key[]
 
     uploads Upload[]
+
+    issuedRapSheets   RapSheet[] @relation("issuer")
+    receivedRapSheets RapSheet[] @relation("recipient")
 }
 
 model Session {
@@ -66,4 +69,26 @@ model Upload {
     user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
     @@index([user_id])
+}
+
+enum RapSheetType {
+    BAN
+    UNBAN
+}
+
+model RapSheet {
+    id   String       @id @unique @default(uuid())
+    type RapSheetType
+
+    reason     String?
+    duration   Int?
+    occurredAt DateTime @default(now())
+
+    issuer   User   @relation("issuer", fields: [issuerId], references: [id])
+    issuerId String
+
+    recipient   User   @relation("recipient", fields: [recipientId], references: [id])
+    recipientId String
+
+    @@index([recipientId])
 }

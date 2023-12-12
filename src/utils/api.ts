@@ -80,3 +80,5 @@ export type UploadGetRecentOutput = RouterOutputs['upload']['getRecent'];
 
 export type UserGetAllUsersOutput = RouterOutputs['user']['getAllUsers'];
 export type UserGetAllUsersOutputItem = UserGetAllUsersOutput[number];
+
+export type UserGetUserByIDOutput = RouterOutputs['user']['getUserByID'];

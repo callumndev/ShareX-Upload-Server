@@ -16,6 +16,7 @@ import Role from "@/components/Role"
 import { Checkbox } from "@/components/Checkbox"
 
 import type { UserGetAllUsersOutputItem } from "@/utils/api"
+import Link from "next/link"
 
 export const columns: ColumnDef<UserGetAllUsersOutputItem>[] = [
     {
@@ -43,6 +44,21 @@ export const columns: ColumnDef<UserGetAllUsersOutputItem>[] = [
     {
         accessorKey: "id",
         header: "ID",
+        cell: ({ row }) => {
+            const user = row.original
+            const userLink = `/users/${user.id}`
+
+            return (
+                <>
+                    <Link
+                        href={userLink}
+                        className="hover:underline"
+                    >
+                        {user.id}
+                    </Link>
+                </>
+            )
+        },
     },
     {
         accessorKey: "username",
@@ -95,7 +111,7 @@ export const columns: ColumnDef<UserGetAllUsersOutputItem>[] = [
     },
     {
         id: "lastUploaded",
-        accessorFn: (user) => user.uploads[0]?.createdAt,
+        accessorFn: (user) => user.uploads[0]?.createdAt.getTime(),
         header: ({ column }) => {
             return (
                 <Button
